@@ -2,6 +2,8 @@
 
 A Chrome extension for saving and managing articles to read later.
 
+<img src="./sample_images/sample.gif">
+
 ## How to Use
 
 You can use it by installing it from the following URL.
