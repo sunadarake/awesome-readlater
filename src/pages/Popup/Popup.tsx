@@ -56,8 +56,6 @@ const Popup: React.FC = () => {
 
   return (
     <Container className="p-3 bg-white rl-width">
-      <h1 className="fs-3">Read Later</h1>
-
       <div className="d-flex align-items-center justify-content-between mb-2">
         <span className="fw-bold fs-6">Total: {items.length}</span>
 
@@ -77,7 +75,7 @@ const Popup: React.FC = () => {
       <ListGroup>
         {filteredItems.map(({ url, favicon, title }) => (
           <ListGroup.Item key={url} className="p-1 d-flex justify-content-between align-items-center">
-            <a href={url} target="_blank" rel="noopener noreferrer" className="fs-6 text-decoration-none">
+            <a href={url} target="_blank" rel="noopener noreferrer" className="fs-6 text-decoration-none flex-grow-1">
               {favicon && <img src={favicon} alt="Favicon" className="favicon-size" />} {title || url}
             </a>
             <Button variant="danger" size="sm" onClick={() => handleDeleteURL(url)}>
