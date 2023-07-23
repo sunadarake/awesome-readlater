@@ -4,49 +4,51 @@ import { Item } from "../../containers/item";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Popup.css";
+import { chromeSetBadgeText, chromeStorageGet, chromeStorageSet, chromeTabsQuery } from "./ChromeUtil";
 
 const Popup: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [searchKeyword, setSearchKeyword] = useState<string>("");
 
   useEffect(() => {
-    chrome.storage.sync.get({ items: [] }, (data) => {
+    (async () => {
+      const data = await chromeStorageGet();
       setItems(data.items);
-    });
+    })();
   }, []);
 
-  const saveURL = (url: string, favicon?: string, title?: string) => {
-    chrome.storage.sync.get({ items: [] }, (data) => {
-      const items: Item[] = data.items;
-      const filterItems = items.filter(it => it.url !== url);
-      const newItems = [{ url, favicon, title }, ...filterItems];
+  const saveURL = (url: string, hostName: string, title?: string) => {
+    const filterItems = items.filter(it => it.url !== url);
+    const newItems = [{ url, hostName, title }, ...filterItems];
 
-      chrome.storage.sync.set({ items: newItems });
-      setItems(newItems);
+    chromeStorageSet(newItems);
+    setItems(newItems);
 
-      chrome.action.setBadgeText({ text: (newItems || []).length.toString() });
-    });
+    chromeSetBadgeText(newItems);
   };
 
-  const handleAddURL = () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs.length > 0) {
-        const currentTab = tabs[0];
-        const currentURL = currentTab.url;
-        const pageTitle = currentTab.title;
-        const faviconURL = currentTab.favIconUrl;
+  const handleAddURL = async () => {
+    const tabs = await chromeTabsQuery();
 
-        if (currentURL) {
-          saveURL(currentURL, faviconURL, pageTitle);
+    if (tabs.length > 0) {
+      const currentTab = tabs[0];
+      const currentURL = currentTab.url;
+      const pageTitle = currentTab.title;
+
+      if (currentURL) {
+        const result = currentURL.match(/(https?:\/\/(?:www\.)?[a-zA-Z0-9]+\.[a-zA-Z0-9]+)/);
+        if (result !== null) {
+          const hostName = result[1];
+          saveURL(currentURL, hostName, pageTitle);
         }
       }
-    });
+    }
   };
 
   const handleDeleteURL = (url: string) => {
     const updateItems = items.filter(it => it.url !== url);
     setItems(updateItems);
-    chrome.storage.sync.set({ items: updateItems.map(it => ({ url: it.url, title: it.title })) });
+    chromeStorageSet(updateItems);
     chrome.action.setBadgeText({ text: (updateItems || []).length.toString() });
   };
 
@@ -73,10 +75,10 @@ const Popup: React.FC = () => {
         />
       </Form>
       <ListGroup>
-        {filteredItems.map(({ url, favicon, title }) => (
+        {filteredItems.map(({ url, hostName, title }) => (
           <ListGroup.Item key={url} className="p-1 d-flex justify-content-between align-items-center">
             <a href={url} target="_blank" rel="noopener noreferrer" className="fs-6 text-decoration-none flex-grow-1">
-              {favicon && <img src={favicon} alt="Favicon" className="favicon-size" />} {title || url}
+              <img src={`https://www.google.com/s2/favicons?domain=${hostName}`} alt="Favicon" className="favicon-size" /> {title || url}
             </a>
             <Button variant="danger" size="sm" onClick={() => handleDeleteURL(url)}>
               <i className="bi bi-trash"></i>

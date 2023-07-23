@@ -1,11 +1,9 @@
 import { Item } from "../../containers/item";
 
-const listener = () => {
-    chrome.storage.sync.get({ items: [] }, (data) => {
-        const items: Item[] = data.items;
-
-        chrome.action.setBadgeText({ text: (items || []).length.toString() });
-    });
+const listener = async () => {
+    const data = await chrome.storage.sync.get({ items: [] });
+    const items: Item[] = data.items;
+    chrome.action.setBadgeText({ text: (items || []).length.toString() });
 }
 
 chrome.runtime.onStartup.addListener(listener);
