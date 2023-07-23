@@ -1,5 +1,5 @@
 export type Item = {
     url: string
-    favicon?: string
+    hostName: string
     title?: string
 };
