@@ -49,7 +49,7 @@ const Popup: React.FC = () => {
     const updateItems = items.filter(it => it.url !== url);
     setItems(updateItems);
     chromeStorageSet(updateItems);
-    chrome.action.setBadgeText({ text: (updateItems || []).length.toString() });
+    chromeSetBadgeText(updateItems);
   };
 
   const filteredItems = searchKeyword
