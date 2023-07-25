@@ -2,11 +2,16 @@
 
 A Chrome extension for saving and managing articles to read later.
 
-<img src="./sample_images/sample.gif">
+<img src="./sample_images/bookmark_thumb.png">
 
-## How to Use
+## Install
 
 You can use it by installing it from the following URL.
+
+## How to use
+
+<img src="./sample_images/sample.gif">
+
 
 ## Dev Environment
 

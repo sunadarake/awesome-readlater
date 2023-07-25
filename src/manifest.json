@@ -7,10 +7,12 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_icon": "icon-34.png"
+    "default_icon": "icon_48.png"
   },
   "icons": {
-    "128": "icon-128.png"
+    "128": "icon_128.png",
+    "48": "icon_48.png",
+    "16": "icon_16.png"
   },
   "permissions": [
     "storage",
