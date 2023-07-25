@@ -1,7 +1,7 @@
 {
-  "name": "awesome-readlater",
+  "name": "chrome-mini-bookmarks",
   "version": "1.0.0",
-  "description": "A Chrome extension for saving and managing articles to read later.",
+  "description": "A small but excellent Chrome extension bookmark with good searchability.",
   "license": "MIT",
   "repository": {
     "type": "git",
