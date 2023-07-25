@@ -8,6 +8,8 @@ A Chrome extension for saving and managing articles to read later.
 
 You can use it by installing it from the following URL.
 
+https://chrome.google.com/webstore/detail/mini-bookmarks/lipgpfampommaphglnnnjjojidmkdlkn?hl=ja&authuser=0
+
 ## How to use
 
 <img src="./sample_images/sample.gif">
