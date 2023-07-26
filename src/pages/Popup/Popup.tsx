@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, ListGroup, Form } from "react-bootstrap";
 import { Item } from "../../containers/item";
-import "bootstrap-icons/font/bootstrap-icons.css";
+import "bootstrap-icons/font/bootstrap-icons.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Popup.css";
 import { chromeSetBadgeText, chromeStorageGet, chromeStorageSet, chromeTabsQuery } from "./ChromeUtil";
