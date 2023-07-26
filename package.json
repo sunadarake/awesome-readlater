@@ -1,6 +1,6 @@
 {
   "name": "chrome-mini-bookmarks",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A small but excellent Chrome extension bookmark with good searchability.",
   "license": "MIT",
   "repository": {
