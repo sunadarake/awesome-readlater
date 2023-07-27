@@ -1,5 +1,8 @@
 # ⭐️ mini bookmarks
 
+![Static Badge](https://img.shields.io/badge/lang-typescript-blue) ![Static Badge](https://img.shields.io/badge/library-react-blue) ![Static Badge](https://img.shields.io/badge/chrome_extension-orange) ![Static Badge](https://img.shields.io/badge/version-1.0.1-red)
+
+
 A Chrome extension for saving and managing articles to read later.
 
 <img src="./sample_images/bookmark_thumb.png">
