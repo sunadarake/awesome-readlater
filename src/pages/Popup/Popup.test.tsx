@@ -9,14 +9,12 @@ test("renders Add button", async () => {
     // We retrieve the list of registered sites from the Storage,
     // when the popup is displayed, 
     jest.spyOn(chromeUtil, "chromeStorageGet").mockImplementation(() => {
-        const data = {
-            items: [
-                { url: "https://example.com", title: "Example", hostName: "https://example.com" },
-                { url: "https://test.com", title: "Test", hostName: "https://test.com" },
-            ]
-        };
+        const items = [
+            { url: "https://example.com", title: "Example", hostName: "https://example.com" },
+            { url: "https://test.com", title: "Test", hostName: "https://test.com" },
+        ]
 
-        return Promise.resolve(data);
+        return Promise.resolve(items);
     });
 
     render(<Popup />);
@@ -29,14 +27,12 @@ test("renders Total URLs count", async () => {
     // We retrieve the list of registered sites from the Storage,
     // when the popup is displayed, 
     jest.spyOn(chromeUtil, "chromeStorageGet").mockImplementation(() => {
-        const data = {
-            items: [
-                { url: "https://example.com", title: "Example", hostName: "https://example.com" },
-                { url: "https://test.com", title: "Test", hostName: "https://test.com" },
-            ]
-        };
+        const items = [
+            { url: "https://example.com", title: "Example", hostName: "https://example.com" },
+            { url: "https://test.com", title: "Test", hostName: "https://test.com" },
+        ];
 
-        return Promise.resolve(data);
+        return Promise.resolve(items);
     });
 
     render(<Popup />);
@@ -49,13 +45,11 @@ test("When we click the 'Add' button, the current URL will be registered.", asyn
     // We retrieve the list of registered sites from the Storage,
     // when the popup is displayed, 
     jest.spyOn(chromeUtil, "chromeStorageGet").mockImplementation(() => {
-        const data = {
-            items: [
-                { url: "https://example.com", title: "Example", hostName: "https://example.com" },
-            ]
-        };
+        const items = [
+            { url: "https://example.com", title: "Example", hostName: "https://example.com" },
+        ];
 
-        return Promise.resolve(data);
+        return Promise.resolve(items);
     });
 
     // We obtain the current tab's URL and title, When the Add button is clicked.
