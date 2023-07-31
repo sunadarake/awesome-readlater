@@ -3,8 +3,9 @@ import { Container, Button, ListGroup, Form } from "react-bootstrap";
 import { Item } from "../../containers/item";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./Popup.css";
-import { chromeSetBadgeText, chromeStorageGet, chromeStorageSet, chromeTabsQuery } from "./ChromeUtil";
+import "./Common.css";
+import { chromeCheckMigration, chromeSetBadgeText, chromeStorageGet, chromeStorageSet, chromeTabsQuery } from "./ChromeUtil";
+import { Link } from "react-router-dom";
 
 const Popup: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
@@ -12,8 +13,8 @@ const Popup: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      const data = await chromeStorageGet();
-      setItems(data.items);
+      const items = await chromeStorageGet();
+      setItems(items);
     })();
   }, []);
 
@@ -59,6 +60,7 @@ const Popup: React.FC = () => {
   return (
     <Container className="p-3 bg-white rl-width">
       <div className="d-flex align-items-center justify-content-between mb-2">
+        <Link to="/setting">Setting</Link>
         <span className="fw-bold fs-6">Total: {items.length}</span>
 
         <Button variant="success" className="btn-sm" onClick={() => handleAddURL()}>
