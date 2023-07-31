@@ -22,6 +22,10 @@ config.plugins = (config.plugins || []).concat(
   })
 );
 
-webpack(config, function (err) {
-  if (err) throw err;
+webpack(config, (err, stats) => {
+  if (err) {
+    console.error('Error while running webpack:', err);
+  } else {
+    console.log(stats.toString());
+  }
 });
