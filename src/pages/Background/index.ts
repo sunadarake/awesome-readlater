@@ -1,10 +1,31 @@
 import { Item } from "../../containers/item";
+import { chromeCheckMigration, chromeSetFlagMigration, chromeStorageGet, chromeStorageSet, chromeStorageSyncGet } from "../Popup/ChromeUtil";
 
-const listener = async () => {
-    const data = await chrome.storage.sync.get({ items: [] });
-    const items: Item[] = data.items;
+const setBadge = async () => {
+    const items = await chromeStorageGet();
     chrome.action.setBadgeText({ text: (items || []).length.toString() });
 }
 
-chrome.runtime.onStartup.addListener(listener);
-chrome.runtime.onInstalled.addListener(listener);
+const updateStorage = async () => {
+    const isMigration = await chromeCheckMigration();
+
+    if (isMigration) {
+        const data = await chromeStorageSyncGet();
+        const items = data.items;
+
+        if (items) {
+            chromeStorageSet(items);
+        }
+
+        chromeSetFlagMigration();
+    }
+}
+
+chrome.runtime.onStartup.addListener(() => {
+    setBadge();
+});
+
+chrome.runtime.onInstalled.addListener(() => {
+    updateStorage();
+    setBadge();
+});
