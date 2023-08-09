@@ -28,6 +28,15 @@ const Popup: React.FC = () => {
     chromeSetBadgeText(newItems);
   };
 
+  const parseHost = (url: string): string => {
+    const result = url.match(/^(https?:\/\/[^/]+)/);
+    if (result !== null) {
+      return result[1];
+    } else {
+      return "";
+    }
+  }
+
   const handleAddURL = async () => {
     const tabs = await chromeTabsQuery();
 
@@ -37,11 +46,8 @@ const Popup: React.FC = () => {
       const pageTitle = currentTab.title;
 
       if (currentURL) {
-        const result = currentURL.match(/(https?:\/\/(?:www\.)?[a-zA-Z0-9]+\.[a-zA-Z0-9]+)/);
-        if (result !== null) {
-          const hostName = result[1];
-          saveURL(currentURL, hostName, pageTitle);
-        }
+        const hostName = parseHost(currentURL);
+        saveURL(currentURL, hostName, pageTitle);
       }
     }
   };
